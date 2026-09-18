@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "snake-web",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8891", "--directory", "snake-web"],
+      "port": 8891
+    },
+    {
+      "name": "pacman-web",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5174", "--directory", "pacman-web"],
+      "port": 5174
+    },
+    {
+      "name": "snake-game",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5175", "--directory", "snake-game"],
+      "port": 5175
+    },
+    {
+      "name": "hangman-web",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5176", "--directory", "hangman-web"],
+      "port": 5176
+    }
+  ]
+}

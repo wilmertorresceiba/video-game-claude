@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pac-Man Web</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>PAC-MAN</h1>
+
+    <div class="hud">
+      <div class="hud-item">Puntos: <span id="score">0</span></div>
+      <div class="hud-item">Vidas: <span id="lives">🟡🟡🟡</span></div>
+      <div class="hud-item">Nivel: <span id="level">1</span></div>
+    </div>
+
+    <div class="canvas-holder">
+      <canvas id="game" width="532" height="532"></canvas>
+      <div id="overlay" class="overlay">
+        <div class="overlay-box">
+          <h2 id="overlay-title">PAC-MAN</h2>
+          <p id="overlay-text">Usa las flechas o WASD para moverte.<br>Come todos los puntos y evita a los fantasmas.</p>
+          <button id="start-btn">Jugar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="touch-controls">
+      <button data-dir="up">▲</button>
+      <div class="touch-row">
+        <button data-dir="left">◀</button>
+        <button data-dir="down">▼</button>
+        <button data-dir="right">▶</button>
+      </div>
+    </div>
+
+    <p class="hint">Flechas / WASD para mover · Come la fruta grande para asustar a los fantasmas</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

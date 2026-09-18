@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis Juegos</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2d2d44);
+    color: #f0f0f0;
+    padding: 40px 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+  }
+
+  p.subtitle {
+    color: #b0b0c0;
+    margin-bottom: 24px;
+  }
+
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(108, 99, 255, 0.08);
+    border: 1px solid rgba(108, 99, 255, 0.35);
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    color: #c9c6ff;
+  }
+
+  .ai-badge .spark {
+    font-size: 0.9rem;
+  }
+
+  .ai-badge strong {
+    background: linear-gradient(90deg, #a78bfa, #6c63ff, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+  }
+
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #2a2a3d;
+    border: 1px solid #3d3d55;
+    border-radius: 12px;
+    padding: 32px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .game-card:hover {
+    transform: translateY(-6px);
+    border-color: #6c63ff;
+    box-shadow: 0 10px 24px rgba(108, 99, 255, 0.35);
+  }
+
+  .game-card .icon {
+    font-size: 2.8rem;
+  }
+
+  .game-card .name {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .game-card .desc {
+    font-size: 0.85rem;
+    color: #a0a0b8;
+  }
+
+  footer {
+    margin-top: 48px;
+    color: #6a6a80;
+    font-size: 0.8rem;
+  }
+
+  footer .credit {
+    display: block;
+    margin-top: 6px;
+    font-style: italic;
+    color: #8a87a8;
+  }
+
+  footer .credit strong {
+    font-style: normal;
+    background: linear-gradient(90deg, #a78bfa, #6c63ff, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Mis Juegos</h1>
+    <p class="subtitle">Elige un juego para empezar a jugar</p>
+
+    <div class="ai-badge">
+      <span class="spark">✨</span>
+      Creado con la asistencia de <strong>Claude</strong>
+    </div>
+
+    <div class="menu">
+      <a class="game-card" href="snake-web/index.html">
+        <span class="icon">🐍</span>
+        <span class="name">Snake</span>
+        <span class="desc">El clásico juego de la serpiente</span>
+      </a>
+
+      <a class="game-card" href="snake-game/index.html">
+        <span class="icon">🟢</span>
+        <span class="name">Snake Game</span>
+        <span class="desc">Otra versión de Snake</span>
+      </a>
+
+      <a class="game-card" href="pacman-web/index.html">
+        <span class="icon">👻</span>
+        <span class="name">Pac-Man</span>
+        <span class="desc">Escapa de los fantasmas</span>
+      </a>
+
+      <a class="game-card" href="hangman-web/index.html">
+        <span class="icon">🔤</span>
+        <span class="name">Ahorcado</span>
+        <span class="desc">Adivina la palabra oculta</span>
+      </a>
+    </div>
+
+    <footer>
+      Selecciona una tarjeta para jugar
+      <span class="credit">Diseñado y desarrollado con la asistencia de <strong>Claude AI</strong></span>
+    </footer>
+  </div>
+</body>
+</html>

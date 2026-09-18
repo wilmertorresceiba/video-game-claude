@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #2a1b1b, #0f0a0a 70%);
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #fbeaea;
+}
+
+.game-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 520px;
+}
+
+h1 {
+  margin: 0;
+  letter-spacing: 4px;
+  color: #ff7c4a;
+  text-shadow: 0 0 10px rgba(255, 124, 74, 0.6);
+}
+
+/* --- setup / category selection --- */
+
+.setup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.setup-label {
+  margin: 0;
+  color: #eccdcd;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.category-btn {
+  background: #201414;
+  border: 2px solid #5a3a3a;
+  color: #fbeaea;
+  padding: 14px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.category-btn:hover {
+  background: #2c1a1a;
+  border-color: #ff7c4a;
+  transform: scale(1.03);
+}
+
+/* --- game --- */
+
+.game {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.hud {
+  display: flex;
+  gap: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hud-item span {
+  color: #ff7c4a;
+}
+
+.board-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#hangman-svg {
+  background: #170f0f;
+  border: 3px solid #5a3a3a;
+  border-radius: 8px;
+  box-shadow: 0 0 24px rgba(255, 124, 74, 0.15);
+}
+
+.gallows {
+  stroke: #8a6a5a;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.figure {
+  stroke: #ff7c4a;
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+  transition: opacity 0.2s ease;
+}
+
+circle.figure {
+  fill: none;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.word-display {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  word-break: break-all;
+  text-align: center;
+  min-height: 36px;
+}
+
+.hint-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+#hint-btn {
+  background: transparent;
+  color: #ff7c4a;
+  border: 1px solid #ff7c4a;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#hint-btn:hover {
+  background: rgba(255, 124, 74, 0.12);
+}
+
+#hint-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+#hint-text {
+  margin: 0;
+  font-size: 13px;
+  color: #eccdcd;
+  max-width: 420px;
+  font-style: italic;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-width: 460px;
+}
+
+.key-btn {
+  width: 34px;
+  height: 40px;
+  border-radius: 6px;
+  border: 2px solid #5a3a3a;
+  background: #201414;
+  color: #fbeaea;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.key-btn:hover:not(:disabled) {
+  background: #2c1a1a;
+  border-color: #ff7c4a;
+}
+
+.key-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.key-btn.correct {
+  background: #2f5a2f;
+  border-color: #7cfc00;
+  color: #eafbea;
+}
+
+.key-btn.wrong {
+  background: #5a2f2f;
+  border-color: #ff4a4a;
+  color: #fbeaea;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-content {
+  background: #170f0f;
+  border: 2px solid #5a3a3a;
+  border-radius: 10px;
+  padding: 28px;
+  max-width: 320px;
+}
+
+.overlay-content h2 {
+  margin: 0 0 8px;
+  color: #ff7c4a;
+}
+
+.overlay-content p {
+  margin: 0 0 16px;
+  color: #eccdcd;
+}
+
+.overlay-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.overlay-actions button {
+  background: #ff7c4a;
+  color: #170f0f;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.overlay-actions button:hover {
+  background: #ff9a70;
+  transform: scale(1.05);
+}

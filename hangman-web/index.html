@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahorcado</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-wrap">
+    <h1>Ahorcado</h1>
+
+    <div class="setup" id="setup">
+      <p class="setup-label">Elige una categoría</p>
+      <div class="category-grid" id="category-grid"></div>
+    </div>
+
+    <div class="game" id="game" hidden>
+      <div class="hud">
+        <div class="hud-item">Categoría: <span id="category-name">-</span></div>
+        <div class="hud-item">Intentos: <span id="attempts-left">6</span></div>
+      </div>
+
+      <div class="board-wrap">
+        <svg id="hangman-svg" viewBox="0 0 200 220" width="200" height="220">
+          <line x1="10" y1="210" x2="150" y2="210" class="gallows" />
+          <line x1="40" y1="210" x2="40" y2="10" class="gallows" />
+          <line x1="40" y1="10" x2="120" y2="10" class="gallows" />
+          <line x1="120" y1="10" x2="120" y2="35" class="gallows" />
+          <circle id="part-head" cx="120" cy="50" r="15" class="figure hidden" />
+          <line id="part-body" x1="120" y1="65" x2="120" y2="120" class="figure hidden" />
+          <line id="part-left-arm" x1="120" y1="80" x2="100" y2="105" class="figure hidden" />
+          <line id="part-right-arm" x1="120" y1="80" x2="140" y2="105" class="figure hidden" />
+          <line id="part-left-leg" x1="120" y1="120" x2="100" y2="150" class="figure hidden" />
+          <line id="part-right-leg" x1="120" y1="120" x2="140" y2="150" class="figure hidden" />
+        </svg>
+
+        <div class="word-display" id="word-display"></div>
+      </div>
+
+      <div class="hint-row">
+        <button id="hint-btn">Mostrar pista</button>
+        <p id="hint-text"></p>
+      </div>
+
+      <div class="keyboard" id="keyboard"></div>
+
+      <div class="overlay hidden" id="overlay">
+        <div class="overlay-content">
+          <h2 id="overlay-title">¡Ganaste!</h2>
+          <p id="overlay-msg"></p>
+          <div class="overlay-actions">
+            <button id="retry-btn">Jugar de nuevo</button>
+            <button id="change-category-btn">Cambiar categoría</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
