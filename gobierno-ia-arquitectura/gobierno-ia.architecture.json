@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Gobierno de IA: el recorrido de un prompt",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "views": [
+      {
+        "id": "camino-correcto",
+        "label": "Camino correcto",
+        "focus": [
+          "colaborador",
+          "semaforo",
+          "guard_in",
+          "herramienta",
+          "guard_out",
+          "validacion",
+          "entregable"
+        ],
+        "note": "Del prompt al entregable: clasificar, filtrar, generar, filtrar y validar."
+      },
+      {
+        "id": "caso1-shadow-ai",
+        "label": "Caso 1: fuga por Shadow AI",
+        "focus": [
+          "colaborador",
+          "shadow",
+          "semaforo",
+          "politica"
+        ],
+        "note": "Log con token y correos en cuenta personal: ALTO. Rotar credenciales y reportar."
+      },
+      {
+        "id": "caso5-agente",
+        "label": "Caso 5: agente con prompt injection",
+        "focus": [
+          "externo",
+          "agente",
+          "herramienta",
+          "guard_out",
+          "validacion"
+        ],
+        "note": "Texto oculto intenta enviar /contratos. Mínimo privilegio y aprobación humana."
+      },
+      {
+        "id": "caso4-tokens",
+        "label": "Caso 4: la conversación eterna",
+        "focus": [
+          "colaborador",
+          "herramienta",
+          "contexto"
+        ],
+        "note": "Cada mensaje reenvía todo el historial. Un tema por chat."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "shadow",
+      "type": "external",
+      "label": "Shadow AI",
+      "sublabel": "cuenta personal",
+      "pos": [
+        30,
+        174
+      ],
+      "size": [
+        130,
+        62
+      ],
+      "tag": "prohibido"
+    },
+    {
+      "id": "colaborador",
+      "type": "frontend",
+      "label": "Colaborador",
+      "sublabel": "rol + contexto + tarea",
+      "pos": [
+        230,
+        174
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "persona"
+    },
+    {
+      "id": "semaforo",
+      "type": "security",
+      "label": "Semáforo",
+      "sublabel": "clasificar información",
+      "pos": [
+        460,
+        174
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "checklist"
+    },
+    {
+      "id": "guard_in",
+      "type": "security",
+      "label": "Guardrail entrada",
+      "sublabel": "DLP · PII · injection",
+      "pos": [
+        700,
+        174
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "sistema"
+    },
+    {
+      "id": "politica",
+      "type": "backend",
+      "label": "Política y roles",
+      "sublabel": "Líder → TI → Legal",
+      "pos": [
+        460,
+        44
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "gobierno"
+    },
+    {
+      "id": "herramienta",
+      "type": "cloud",
+      "label": "IA empresarial",
+      "sublabel": "SSO · sin entrenamiento",
+      "pos": [
+        920,
+        284
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "autorizada"
+    },
+    {
+      "id": "contexto",
+      "type": "backend",
+      "label": "Ventana de contexto",
+      "sublabel": "tokens entrada / salida",
+      "pos": [
+        1120,
+        394
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "costo"
+    },
+    {
+      "id": "agente",
+      "type": "security",
+      "label": "Agente",
+      "sublabel": "mínimo privilegio",
+      "pos": [
+        1120,
+        174
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "nivel 3"
+    },
+    {
+      "id": "externo",
+      "type": "external",
+      "label": "Contenido externo",
+      "sublabel": "documento de proveedor",
+      "pos": [
+        1120,
+        24
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "no confiable"
+    },
+    {
+      "id": "guard_out",
+      "type": "security",
+      "label": "Guardrail salida",
+      "sublabel": "filtro · formato",
+      "pos": [
+        700,
+        394
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "sistema"
+    },
+    {
+      "id": "validacion",
+      "type": "frontend",
+      "label": "Validación humana",
+      "sublabel": "entender · probar",
+      "pos": [
+        460,
+        394
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "persona"
+    },
+    {
+      "id": "entregable",
+      "type": "database",
+      "label": "Entregable",
+      "sublabel": "firma humana",
+      "pos": [
+        230,
+        394
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "trazable"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Su organización",
+      "wraps": [
+        "politica",
+        "colaborador",
+        "semaforo",
+        "guard_in",
+        "guard_out",
+        "validacion",
+        "entregable"
+      ],
+      "pad": 20
+    },
+    {
+      "kind": "security-group",
+      "label": "Proveedor de IA · tercero",
+      "wraps": [
+        "herramienta",
+        "contexto",
+        "agente"
+      ],
+      "pad": 20
+    }
+  ],
+  "connections": [
+    {
+      "from": "colaborador",
+      "to": "semaforo",
+      "label": "prompt",
+      "variant": "emphasis"
+    },
+    {
+      "from": "semaforo",
+      "to": "guard_in",
+      "label": "anonimizado",
+      "variant": "emphasis"
+    },
+    {
+      "from": "guard_in",
+      "to": "herramienta",
+      "label": "sale del equipo",
+      "variant": "security"
+    },
+    {
+      "from": "herramienta",
+      "to": "guard_out",
+      "label": "respuesta",
+      "variant": "emphasis"
+    },
+    {
+      "from": "guard_out",
+      "to": "validacion",
+      "label": "borrador",
+      "variant": "emphasis"
+    },
+    {
+      "from": "validacion",
+      "to": "entregable",
+      "label": "aprobado",
+      "variant": "emphasis"
+    },
+    {
+      "from": "herramienta",
+      "to": "contexto",
+      "label": "tokens",
+      "variant": "dashed"
+    },
+    {
+      "from": "herramienta",
+      "to": "agente",
+      "label": "acciones",
+      "variant": "security"
+    },
+    {
+      "from": "externo",
+      "to": "agente",
+      "label": "injection",
+      "variant": "dashed",
+      "labelAt": [
+        1195,
+        118
+      ]
+    },
+    {
+      "from": "politica",
+      "to": "semaforo",
+      "label": "define reglas",
+      "labelAt": [
+        530,
+        140
+      ]
+    },
+    {
+      "from": "colaborador",
+      "to": "shadow",
+      "label": "ALTO",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Niveles de guardrails",
+      "items": [
+        "1 Organización: SSO, DLP",
+        "2 Herramienta: sin entrenamiento",
+        "3 Agentes: aprobación humana",
+        "4 Desarrollo: gitleaks, SAST"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Tokens: menos es más",
+      "items": [
+        "Menos información expuesta",
+        "Menos costo (salida más cara)",
+        "Menos ruido, mejores respuestas"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Casos en el mapa",
+      "items": [
+        "1 Log personal → Shadow AI",
+        "2 Informe → Validación humana",
+        "4 Chat eterno → Contexto",
+        "5 Agente → Contenido externo"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Reglas de oro",
+      "items": [
+        "Solo herramientas autorizadas",
+        "Nunca credenciales ni PII",
+        "La IA propone; tú verificas",
+        "Si falla: rotar y reportar"
+      ]
+    }
+  ]
+}

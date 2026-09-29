@@ -24,6 +24,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "5176", "--directory", "hangman-web"],
       "port": 5176
+    },
+    {
+      "name": "gobierno-ia-web",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5177", "--directory", "gobierno-ia-web"],
+      "port": 5177
     }
   ]
 }
