@@ -155,6 +155,107 @@ const JUEGOS = [
       },
     ],
   },
+  {
+    id: 'tokens',
+    pestana: '3. Tokens',
+    eyebrow: 'Tokens · Cómo funciona la IA por dentro',
+    titulo: 'El juego de los tokens',
+    descripcion: `La IA no lee palabras: lee <b style="color:var(--accent)">tokens</b>.
+      Todo lo que envías se convierte en tokens, y eso sale de tu equipo y además cuesta.<br>
+      Descubre qué los consume, cómo se cobran y qué pasa con la ventana de contexto.`,
+    rondas: [
+      {
+        titulo: '¿Qué gasta más tokens?',
+        pregunta: '¿Cuál gasta más tokens?',
+        fraseRespuesta: 'la opción que gasta más tokens es',
+        cierre: `"Un token puede ser una palabra, parte de una palabra o un símbolo.
+          El español, el código, los JSON, los logs y los adjuntos consumen muchos tokens."`,
+        enunciados: [
+          { texto: 'La misma palabra en dos idiomas', respuesta: 'es',
+            opciones: [{ id: 'es', etiqueta: '"Desarrollador"' }, { id: 'en', etiqueta: '"Developer"' }],
+            porque: 'Los modelos se entrenaron con mucho más texto en inglés, así que en español una palabra suele partirse en más tokens.',
+            tokens: [{ texto: 'Desarrollador', partes: ['Des', 'arroll', 'ador'] }, { texto: 'Developer', partes: ['Developer'] }] },
+          { texto: 'Dos formas de pedir ayuda con un error', respuesta: 'log',
+            opciones: [{ id: 'log', etiqueta: 'Pegar el log completo del servidor' }, { id: 'lineas', etiqueta: 'Pegar solo las 10 líneas del error' }],
+            porque: 'Los logs consumen muchísimos tokens, y el log completo además puede exponer tokens de acceso, correos o IPs.' },
+          { texto: 'El mismo dato en dos formatos', respuesta: 'json',
+            opciones: [{ id: 'json', etiqueta: 'Un JSON de 200 líneas' }, { id: 'frase', etiqueta: 'Una frase que describe la estructura' }],
+            porque: 'Llaves, comillas, comas y espacios también son tokens. Muchas veces basta con describir la estructura o enviar un ejemplo corto.',
+            tokens: [{ texto: '{"id": 1}', partes: ['{"', 'id', '":', ' 1', '}'] }] },
+          { texto: 'Un mensaje de "gracias" en dos momentos', respuesta: 'largo',
+            opciones: [{ id: 'nuevo', etiqueta: 'En el mensaje 1 de un chat nuevo' }, { id: 'largo', etiqueta: 'En el mensaje 50 de un chat largo' }],
+            porque: 'En cada mensaje se reenvía toda la conversación. En un chat largo, hasta un "gracias" arrastra miles de tokens de historial.' },
+          { texto: 'Dos maneras de dar contexto', respuesta: 'pdf',
+            opciones: [{ id: 'pdf', etiqueta: 'Adjuntar un PDF de 40 páginas' }, { id: 'resumen', etiqueta: 'Escribir 3 líneas con lo importante' }],
+            porque: 'Las imágenes y los PDF también se convierten en tokens. Si solo necesitas una parte, envía solo esa parte.' },
+          { texto: 'Dos formas de pedir la respuesta', respuesta: 'detalle',
+            opciones: [{ id: 'vinetas', etiqueta: '"Responde en 3 viñetas"' }, { id: 'detalle', etiqueta: '"Explícamelo con todo el detalle posible"' }],
+            porque: 'La respuesta también son tokens, y los de salida cuestan varias veces más. Pide respuestas concisas cuando sea suficiente.' },
+        ],
+      },
+      {
+        titulo: '¿Entrada o salida?',
+        pregunta: '¿Son tokens de entrada o de salida?',
+        cierre: `"Los tokens de salida cuestan varias veces más que los de entrada
+          y determinan cuánto tardas en recibir la respuesta."`,
+        opciones: [
+          { id: 'entrada', etiqueta: '📥 Entrada', frase: 'son tokens de entrada',
+            color: '#0369a1', borde: '#38bdf8', teclas: ['ArrowLeft', '1'],
+            resumen: 'Lo que envías. Más baratos y se procesan rápido.' },
+          { id: 'salida', etiqueta: '📤 Salida', frase: 'son tokens de salida',
+            color: '#7e22ce', borde: '#c084fc', teclas: ['ArrowRight', '2'],
+            resumen: 'Lo que la IA genera. Varias veces más caros y más lentos.' },
+        ],
+        enunciados: [
+          { respuesta: 'entrada', texto: 'El prompt que escribes',
+            porque: 'Todo lo que envías es entrada.' },
+          { respuesta: 'entrada', texto: 'El historial de la conversación',
+            porque: 'Se reenvía como entrada en cada mensaje, aunque tú no lo vuelvas a escribir.' },
+          { respuesta: 'entrada', texto: 'El PDF o la imagen que adjuntas',
+            porque: 'Los adjuntos se convierten en tokens de entrada.' },
+          { respuesta: 'entrada', texto: 'Las instrucciones del sistema',
+            porque: 'También ocupan la ventana de contexto como entrada, aunque no las veas.' },
+          { respuesta: 'salida', texto: 'La respuesta que genera la IA',
+            porque: 'Es salida: los tokens más caros y los que determinan cuánto tardas en recibir la respuesta.' },
+          { respuesta: 'salida', texto: 'El código que la IA escribe por ti',
+            porque: 'Todo lo que la IA genera es salida, sea texto o código.' },
+          { respuesta: 'salida', texto: 'El "razonamiento" del modelo antes de responder',
+            porque: 'Los tokens de razonamiento normalmente se cobran como salida, aunque no los veas completos.' },
+        ],
+      },
+      {
+        titulo: 'Verdadero o falso',
+        pregunta: '¿Verdadero o falso?',
+        cierre: `"En IA, menos es más: menos información expuesta, menos costo y mejores respuestas."`,
+        opciones: [
+          { id: 'v', etiqueta: '✅ Verdadero', frase: 'es verdadero',
+            color: '#15803d', borde: '#22c55e', teclas: ['ArrowLeft', '1'] },
+          { id: 'f', etiqueta: '❌ Falso', frase: 'es falso',
+            color: '#b91c1c', borde: '#ef4444', teclas: ['ArrowRight', '2'] },
+        ],
+        enunciados: [
+          { respuesta: 'f', texto: 'Un token equivale siempre a una palabra.',
+            porque: 'Puede ser una palabra, parte de una palabra o un símbolo. En inglés, 1 token ≈ 4 caracteres ≈ ¾ de palabra.' },
+          { respuesta: 'v', texto: 'Para decir lo mismo, en español se usan más tokens que en inglés.',
+            porque: 'Las palabras en español suelen partirse en más pedazos.' },
+          { respuesta: 'v', texto: 'La ventana de contexto es el límite de tokens que el modelo procesa a la vez.',
+            porque: 'Incluye el prompt, el historial, los adjuntos, las instrucciones del sistema y la respuesta. Es su "memoria de trabajo".' },
+          { respuesta: 'f', texto: 'En cada mensaje, la IA solo lee tu último mensaje.',
+            porque: 'En cada mensaje se reenvía toda la conversación.' },
+          { respuesta: 'v', texto: 'Cuando la ventana de contexto se llena, la IA olvida o resume lo más antiguo.',
+            porque: 'Como un escritorio lleno: cuando no cabe nada más, algo tiene que caerse.' },
+          { respuesta: 'f', texto: 'Mientras más contexto le des a la IA, mejor responde.',
+            porque: 'Más contexto no siempre es mejor: con demasiado ruido, el modelo puede perder el foco.' },
+          { respuesta: 'v', texto: 'Los tokens de salida suelen costar más que los de entrada.',
+            porque: 'Suelen costar varias veces más. Consulta siempre los precios oficiales del proveedor.' },
+          { respuesta: 'f', texto: 'Enviar "todo por si acaso" es la opción más segura.',
+            porque: 'Es lo contrario: más información expuesta, más costo y respuestas menos precisas.' },
+          { respuesta: 'v', texto: 'Los tokens afectan el costo, los límites de uso, la velocidad y hasta el impacto ambiental.',
+            porque: 'Cada token cuenta en los cuatro frentes.' },
+        ],
+      },
+    ],
+  },
 ];
 
 /* ---------- Utilidades compartidas ---------- */
@@ -200,6 +301,24 @@ function reiniciarAnimacion(el, clase) {
 const NOMBRE_TECLA = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓' };
 const nombreTecla = tecla => NOMBRE_TECLA[tecla] || tecla;
 const capitalizar = texto => texto.charAt(0).toUpperCase() + texto.slice(1);
+
+// Valores por defecto para opciones que no definen color ni teclas
+const COLORES_OPCION = ['#1d4ed8', '#7e22ce', '#0f766e', '#c2410c', '#be123c', '#4d7c0f'];
+const teclasPorDefecto = (i, total) =>
+  total === 2 ? [['ArrowLeft', 'ArrowRight'][i], String(i + 1)] : [String(i + 1)];
+
+// Muestra cómo se parte un texto en tokens (ilustrativo)
+function pintarTokens(filas) {
+  return `<div class="tokens">${filas.map(f => `
+      <div class="token-row">
+        <span class="token-word">${f.texto}</span>
+        <span class="token-arrow">→</span>
+        ${f.partes.map(p => `<span class="token">${p}</span>`).join('')}
+        <span class="token-count">= ${f.partes.length} token${f.partes.length === 1 ? '' : 's'}</span>
+      </div>`).join('')}
+      <small>Ilustrativo: cada modelo parte el texto de forma distinta.</small>
+    </div>`;
+}
 
 function confeti() {
   const canvas = document.getElementById('confetti');
@@ -284,6 +403,7 @@ function crearJuego(config) {
         <div class="msg">
           <strong data-ref="fbTitulo"></strong>
           <p data-ref="fbTexto"></p>
+          <div data-ref="fbTokens"></div>
         </div>
         <button class="btn btn-primary" data-action="siguiente">Siguiente ➜</button>
       </div>
@@ -307,7 +427,7 @@ function crearJuego(config) {
   const ref = nombre => raiz.querySelector(`[data-ref="${nombre}"]`);
 
   // Estado de la partida
-  let cola = [], posCola = 0, ronda = null;
+  let cola = [], posCola = 0, ronda = null, opcionesActuales = [];
   let orden = [], indice = 0, aciertos = 0, racha = 0, respuestas = [], respondido = false;
   let aciertosTotales = 0, jugadosTotales = 0;
 
@@ -333,14 +453,6 @@ function crearJuego(config) {
     orden = barajar(ronda.enunciados);
     indice = 0; aciertos = 0; racha = 0; respuestas = [];
 
-    const opciones = ref('opciones');
-    opciones.style.setProperty('--cols', Math.min(ronda.opciones.length, 3));
-    opciones.classList.toggle('many', ronda.opciones.length > 3);
-    opciones.innerHTML = ronda.opciones.map(o => `
-      <button class="choice" data-respuesta="${o.id}" style="--c:${o.color}">
-        ${o.etiqueta}<small>tecla ${o.teclas.map(nombreTecla).join(' o ')}</small>
-      </button>`).join('');
-
     ref('ronda').textContent = variasRondas ? `Ronda ${cola[posCola] + 1} · ${ronda.titulo}` : '';
     ref('pregunta').textContent = ronda.pregunta;
     ref('total').textContent = orden.length;
@@ -348,9 +460,26 @@ function crearJuego(config) {
     pintar();
   }
 
+  // Las opciones son las de la ronda, salvo que el enunciado traiga las suyas.
+  function pintarOpciones(opciones) {
+    opcionesActuales = opciones.map((o, i) => ({
+      color: COLORES_OPCION[i % COLORES_OPCION.length],
+      teclas: teclasPorDefecto(i, opciones.length),
+      ...o,
+    }));
+    const contenedor = ref('opciones');
+    contenedor.style.setProperty('--cols', Math.min(opciones.length, 3));
+    contenedor.classList.toggle('many', opciones.length > 3);
+    contenedor.innerHTML = opcionesActuales.map(o => `
+      <button class="choice" data-respuesta="${o.id}" style="--c:${o.color}">
+        ${o.etiqueta}<small>tecla ${o.teclas.map(nombreTecla).join(' o ')}</small>
+      </button>`).join('');
+  }
+
   function pintar() {
     const item = orden[indice];
     respondido = false;
+    pintarOpciones(item.opciones ? barajar(item.opciones) : ronda.opciones);
     ref('numero').textContent = indice + 1;
     ref('aciertos').textContent = aciertos;
     ref('racha').textContent = racha >= 2 ? `🔥 Racha x${racha}` : '';
@@ -364,7 +493,6 @@ function crearJuego(config) {
     tarjeta.classList.toggle('long', item.texto.length > 80);
     reiniciarAnimacion(tarjeta, 'enter');
 
-    raiz.querySelectorAll('[data-respuesta]').forEach(b => { b.disabled = false; b.classList.remove('reveal'); });
   }
 
   function responder(id) {
@@ -372,7 +500,7 @@ function crearJuego(config) {
     respondido = true;
 
     const item = orden[indice];
-    const correcta = ronda.opciones.find(o => o.id === item.respuesta);
+    const correcta = opcionesActuales.find(o => o.id === item.respuesta);
     const acierto = id === item.respuesta;
     respuestas.push({ ...item, acierto });
 
@@ -389,10 +517,12 @@ function crearJuego(config) {
     });
 
     ref('fbEmoji').textContent = acierto ? '🎉' : '🤔';
+    const frase = correcta.frase || `${ronda.fraseRespuesta || 'la respuesta es'} ${correcta.etiqueta}`;
     ref('fbTitulo').textContent = acierto
-      ? `¡Correcto! ${capitalizar(correcta.frase)}.`
-      : `No exactamente: ${correcta.frase}.`;
+      ? `¡Correcto! ${capitalizar(frase)}.`
+      : `No exactamente: ${frase}.`;
     ref('fbTexto').textContent = item.porque;
+    ref('fbTokens').innerHTML = item.tokens ? pintarTokens(item.tokens) : '';
     ref('aciertos').textContent = aciertos;
     ref('racha').textContent = racha >= 2 ? `🔥 Racha x${racha}` : '';
     ref('barra').style.width = `${((indice + 1) / orden.length) * 100}%`;
@@ -430,8 +560,20 @@ function crearJuego(config) {
         <span class="mark">${r.acierto ? '✔️' : '❌'}</span>
         <span>${r.corto || r.texto + (r.detalle ? ': ' + r.detalle.toLowerCase() : '')}</span></li>`;
     const resumen = ref('resumen');
-    resumen.style.setProperty('--cols', Math.min(ronda.opciones.length, 3));
-    resumen.innerHTML = ronda.opciones.map(o => {
+    if (!ronda.opciones) {
+      // Cada enunciado trae sus propias opciones: resumen en forma de lista.
+      resumen.style.setProperty('--cols', 1);
+      resumen.innerHTML = `<div class="col" style="--c:var(--accent)">
+          <h3>${ronda.pregunta}</h3>
+          <ul>${ronda.enunciados.map(e => {
+            const r = respuestas.find(x => x.texto === e.texto);
+            const correcta = e.opciones.find(o => o.id === e.respuesta);
+            return `<li class="${r.acierto ? '' : 'fail'}">
+                <span class="mark">${r.acierto ? '✔️' : '❌'}</span>
+                <span>${e.texto}: <b>${correcta.etiqueta}</b></span></li>`;
+          }).join('')}</ul>
+        </div>`;
+    } else resumen.innerHTML = ronda.opciones.map(o => {
       const lista = ronda.enunciados
         .filter(e => e.respuesta === o.id)
         .map(e => respuestas.find(r => r.texto === e.texto));
@@ -441,6 +583,7 @@ function crearJuego(config) {
           <ul>${lista.map(itemResumen).join('')}</ul>
         </div>`;
     }).join('');
+    if (ronda.opciones) resumen.style.setProperty('--cols', Math.min(ronda.opciones.length, 3));
     ref('cierre').textContent = ronda.cierre.replace(/\s+/g, ' ');
 
     const boton = ref('finBoton');
@@ -472,7 +615,7 @@ function crearJuego(config) {
     const pantalla = pantallaActual();
     const esAvance = e.key === 'Enter' || e.key === ' ';
     if (pantalla === 'juego') {
-      const opcion = ronda.opciones.find(o => o.teclas.includes(e.key));
+      const opcion = opcionesActuales.find(o => o.teclas.includes(e.key));
       if (opcion) responder(opcion.id);
       else if (esAvance) { e.preventDefault(); siguiente(); }
     } else if (esAvance) {

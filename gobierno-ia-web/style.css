@@ -191,6 +191,25 @@ kbd {
   text-align: left;
 }
 
+/* ---------- Visualización de tokens ---------- */
+.tokens { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.token-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 1.05rem; }
+.token-word { font-weight: 700; }
+.token-arrow, .token-count { color: var(--muted); }
+.token {
+  font-family: Consolas, "Courier New", monospace;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: #0f172a;
+  font-weight: 700;
+  white-space: pre;
+}
+.token:nth-of-type(4n+1) { background: #7dd3fc; }
+.token:nth-of-type(4n+2) { background: #fcd34d; }
+.token:nth-of-type(4n+3) { background: #86efac; }
+.token:nth-of-type(4n+4) { background: #f9a8d4; }
+.tokens small { color: var(--muted); font-size: .85rem; }
+
 /* ---------- Selección de rondas ---------- */
 .rounds { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 720px; margin: 0 auto 28px; }
 .round-card {
