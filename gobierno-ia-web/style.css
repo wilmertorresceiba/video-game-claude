@@ -211,7 +211,7 @@ kbd {
 .tokens small { color: var(--muted); font-size: .85rem; }
 
 /* ---------- Selección de rondas ---------- */
-.rounds { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 720px; margin: 0 auto 28px; }
+.rounds { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; max-width: 980px; margin: 0 auto 28px; }
 .round-card {
   background: var(--panel);
   border: 2px solid var(--line);
